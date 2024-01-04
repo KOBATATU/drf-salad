@@ -1,0 +1,4 @@
+- GitHubのソースコード
+  - https://github.com/NM-Udemy/Django_rest_graphql
+- Youtube
+  - https://www.youtube.com/watch?v=JzO9mRw75Rw
