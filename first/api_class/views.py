@@ -35,3 +35,22 @@ class ItemDetailView(APIView):
         item = Item.objects.get(pk = pk)
         serializer = self.serializer_class(item)
         return Response(serializer.data)
+
+    def put(self, request, pk):
+        item = Item.objects.get(pk = pk)
+        serializer = self.serializer_class(item, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.validated_data)
+
+    def delete(self, request, pk):
+        item = Item.objects.get(pk = pk)
+        item.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def patch(self, request, pk):
+        item = Item.objects.get(pk = pk)
+        serializer = self.serializer_class(item, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.validated_data)
