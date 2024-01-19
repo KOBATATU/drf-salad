@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.validators import UniqueTogetherValidator
 from api_class.models import Item
 
 def check_divide_by_ten(value):
@@ -13,6 +14,13 @@ class ItemModelSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'name': {'write_only': True, 'required': False}
         }
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Item.objects.all(),
+                fields=['name', 'price'],
+                message='nameとpriceの組み合わせに同じ値を入れないでください'
+            )
+        ]
     def validate_price(self, value):
         if self.partial and value is None:
             return value
