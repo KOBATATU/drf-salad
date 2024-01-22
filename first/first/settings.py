@@ -127,8 +127,15 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
+    # 認証をしていなければどのAPIに対してもPOSTできない
+    "DEFAULT_PERMISSION_CLASSES": [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly'
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 5
     # "DEFAULT_RENDERER_CLASSES": [
     # jsonだけの表示にすることができる
     #     'rest_framework.renderers.JSONRenderer'
     # ]
 }
+

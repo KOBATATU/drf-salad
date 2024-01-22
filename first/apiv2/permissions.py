@@ -6,4 +6,4 @@ class CustomPermission(BasePermission):
     def has_permission(self, request, view):
         print(request.user.id)
         print(dir(view))
-        return False
+        return True
